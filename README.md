@@ -1,28 +1,53 @@
 <div align="center">
 
+<img src="./docs/assets/brand/vitaforge-hero-light.png" alt="VitaForge bright AI4S biomedical innovation hero banner" width="100%" />
+
+<br />
+<br />
+
+<img src="./docs/assets/brand/vitaforge-logo-light.png" alt="VitaForge logo" width="118" />
+
 # 🧬 VitaForge
 
 ### 面向医学与生命科学的 AI4S 干实验引擎
 
 **_Forge your AI scientist. From single cell to bedside._**
 
-[![License: BSL 1.1](https://img.shields.io/badge/License-BSL%201.1-blue.svg)](./LICENSE)
-[![Ethics](https://img.shields.io/badge/Ethics-Medical%20%26%20AI%20Responsible-red.svg)](./ETHICS.md)
-[![Platforms](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Gemini-green.svg)](#-一键部署)
-[![Skills](https://img.shields.io/badge/Skills-28%20%2B%20orchestrator-orange.svg)](#-技能矩阵)
-[![One-Click Deploy](https://img.shields.io/badge/Deploy-One--Click-success.svg)](#-一键部署)
-[![中文友好](https://img.shields.io/badge/中文-友好-brightgreen.svg)](#)
+<p>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-BSL%201.1-blue.svg" alt="License: BSL 1.1" /></a>
+  <a href="./ETHICS.md"><img src="https://img.shields.io/badge/Ethics-Medical%20%26%20AI%20Responsible-red.svg" alt="Ethics" /></a>
+  <a href="#-一键部署"><img src="https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Gemini-green.svg" alt="Platforms" /></a>
+  <a href="#-技能矩阵"><img src="https://img.shields.io/badge/Skills-28%20%2B%20orchestrator-orange.svg" alt="Skills" /></a>
+  <a href="#-一键部署"><img src="https://img.shields.io/badge/Deploy-One--Click-success.svg" alt="One-Click Deploy" /></a>
+  <img src="https://img.shields.io/badge/中文-友好-brightgreen.svg" alt="中文友好" />
+</p>
 
-```
- ██╗   ██╗████████╗██╗  ██╗ █████╗ ██████╗ ███████╗
- ██║   ██║╚══██╔══╝██║  ██║██╔══██╗██╔══██╗██╔════╝
- ██║   ██║   ██║   ███████║███████║██████╔╝███████╗
- ╚██╗ ██╔╝   ██║   ██╔══██║██╔══██║██╔══██╗╚════██║
-  ╚████╔╝    ██║   ██║  ██║██║  ██║██║  ██║███████║
-   ╚═══╝     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-```
+<p>
+  <b>AI4S Dry Lab Engine</b> · <b>scRNA-seq Workflow</b> · <b>Evidence Medicine</b> · <b>Research-to-Publication OS</b>
+</p>
 
-_Vita_ (拉丁: 生命) × _Forge_ (锻造工坊) — 在双螺旋与临床之间，锻造你的 AI 科学家。
+<table>
+  <tr>
+    <td align="center"><b>SPEC + OODA</b><br /><sub>从模糊问题到可执行研究闭环</sub></td>
+    <td align="center"><b>Single Cell → Bedside</b><br /><sub>测序分析、文献证据与临床语境贯通</sub></td>
+    <td align="center"><b>28 Skills + Orchestrator</b><br /><sub>Claude / Codex / Gemini 三平台部署</sub></td>
+    <td align="center"><b>BSL + Ethics</b><br /><sub>面向商业化的责任边界与授权模型</sub></td>
+  </tr>
+</table>
+
+<p>
+  <a href="#-一键部署"><b>🚀 一键部署</b></a>
+  ·
+  <a href="#-技能矩阵"><b>查看技能矩阵</b></a>
+  ·
+  <a href="./docs/medical-mcp-servers.md"><b>配置医学 MCP</b></a>
+  ·
+  <a href="./CONTRIBUTING.md"><b>参与共建</b></a>
+</p>
+
+<p>
+  <sub><b>Vita</b> = life. <b>Forge</b> = the workshop. VitaForge turns a blank coding agent into a biomedical AI research cockpit.</sub>
+</p>
 
 </div>
 
