@@ -70,7 +70,7 @@ scRNA-seq 全流程：
 
 ## ⚠️ 伦理红线
 
-所有 skill 涉及医学/生命科学场景时，**必须遵守 [ETHICS.md](./ETHICS.md)**。输出为辅助参考，须经专业资质人员验证。License: [PolyForm Noncommercial](./LICENSE)。
+所有 skill 涉及医学/生命科学场景时，**必须遵守 [ETHICS.md](./ETHICS.md)**。输出为辅助参考，须经专业资质人员验证。License: [Business Source License 1.1](./LICENSE)（2030-07-01 后转 Apache 2.0，商业生产使用需授权）。
 
 详细说明见 [README.md](./README.md)。贡献指南见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 

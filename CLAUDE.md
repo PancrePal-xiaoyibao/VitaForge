@@ -78,6 +78,6 @@
 
 - 不得用于基因/遗传歧视、未授权临床决策、未知情同意研究、生物武器、学术不端
 - 所有输出为**辅助参考**，须经具备资质的专业人员独立验证
-- License: [PolyForm Noncommercial 1.0.0](./LICENSE) — 非商用免费，商用需授权
+- License: [Business Source License 1.1](./LICENSE) — 个人/科研/教育/非营利免费，商业生产需授权；**2030-07-01 后自动转 Apache 2.0 完全开源**
 
 详细说明、技能矩阵、MCP 配置、部署方式见 [README.md](./README.md)。贡献指南见 [CONTRIBUTING.md](./CONTRIBUTING.md)。

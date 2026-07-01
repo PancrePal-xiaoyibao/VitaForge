@@ -2,7 +2,7 @@
 
 > VitaForge 是一个社区驱动的医学-生命科学 AI4S 技能包。无论你是想修一个标点、优化一个 prompt、还是贡献一个全新的生信分析 skill —— 都欢迎你！φ(≧ω≦*)♪
 
-**版本**: 1.0.0 · **License**: [PolyForm Noncommercial 1.0.0](./LICENSE) + [ETHICS.md](./ETHICS.md)
+**版本**: 1.0.0 · **License**: [Business Source License 1.1](./LICENSE) → 转 Apache 2.0 (2030-07-01) + [ETHICS.md](./ETHICS.md)
 
 ---
 
