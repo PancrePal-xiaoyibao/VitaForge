@@ -1,9 +1,15 @@
-# ============================================================================
+﻿# ============================================================================
 # VitaForge 一键部署脚本 (Windows PowerShell)
 # 用法: 在仓库根目录运行  .\deploy\deploy.ps1
-# 行为: 合并部署 .claude/.codex/.gemini 到 %USERPROFILE%，重名文件自动备份
+# 行为: 合并部署 .claude/.codex/.gemini 到 %USERPROFILE%，并写入 .agents/skills，重名文件自动备份
 # ============================================================================
 #requires -Version 5.1
+[CmdletBinding()]
+param(
+    [Alias('y')]
+    [switch]$Yes
+)
+
 $ErrorActionPreference = 'Stop'
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -22,16 +28,24 @@ Write-Host "  Source:  $RepoRoot"
 Write-Host "  Target:  $HomeDir"
 Write-Host ''
 
-$confirm = Read-Host '  将合并部署 .claude/.codex/.gemini，重名文件自动备份。继续？(y/N)'
-if ($confirm -notmatch '^[yY]') {
-    Write-Host '  已取消。' -ForegroundColor Yellow
-    exit 0
+if (-not $Yes) {
+    $confirm = Read-Host '  将合并部署 .claude/.codex/.gemini/.agents，重名文件自动备份。继续？(y/N)'
+    if ($confirm -notmatch '^[yY]') {
+        Write-Host '  已取消。' -ForegroundColor Yellow
+        exit 0
+    }
+}
+else {
+    Write-Host '  非交互模式：已跳过确认。' -ForegroundColor Yellow
 }
 
 function Merge-VitaForgeDir {
-    param([string]$SubPath)
+    param(
+        [string]$SubPath,
+        [string]$TargetSubPath = $SubPath
+    )
     $src = Join-Path $RepoRoot $SubPath
-    $dst = Join-Path $HomeDir $SubPath
+    $dst = Join-Path $HomeDir $TargetSubPath
     if (-not (Test-Path $src)) {
         Write-Host "  [SKIP] 源不存在: $SubPath" -ForegroundColor DarkGray
         return
@@ -51,7 +65,7 @@ function Merge-VitaForgeDir {
         }
         Copy-Item $_.FullName $target -Recurse -Force
     }
-    Write-Host "  [OK] $SubPath  (备份 $bakCount 项)" -ForegroundColor Green
+    Write-Host "  [OK] $SubPath -> $TargetSubPath  (备份 $bakCount 项)" -ForegroundColor Green
 }
 
 Write-Host ''
@@ -61,6 +75,7 @@ Merge-VitaForgeDir '.claude\commands'
 Merge-VitaForgeDir '.claude\agents'
 Merge-VitaForgeDir '.claude\scripts'
 Merge-VitaForgeDir '.codex\skills'
+Merge-VitaForgeDir '.codex\skills' '.agents\skills'
 Merge-VitaForgeDir '.gemini\skills'
 
 Write-Host ''
