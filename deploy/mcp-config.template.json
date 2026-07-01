@@ -1,12 +1,38 @@
 {
   "mcpServers": {
-    "openalex": {
+    "pubmed-llm": {
       "command": "npx",
-      "args": ["-y", "openalex-mcp-server"]
+      "args": ["-y", "<npm-package-for-mcp-pubmed-llm-server>"],
+      "env": {
+        "NCBI_API_KEY": "<your-ncbi-api-key>",
+        "NCBI_EMAIL": "<your-email>",
+        "NCBI_TOOL": "vitaforge"
+      }
     },
-    "pubmed": {
-      "command": "uvx",
-      "args": ["pubmed-mcp-server"]
+    "pubmed-openalex": {
+      "command": "npx",
+      "args": ["-y", "<npm-package-for-pubmed-openAlex-mcp>"],
+      "env": {
+        "NCBI_API_KEY": "<your-ncbi-api-key>",
+        "NCBI_EMAIL": "<your-email>",
+        "OPENALEX_EMAIL": "<your-email>",
+        "OPENALEX_API_KEY": "<your-openalex-api-key-if-required>"
+      }
+    },
+    "knows-medical": {
+      "command": "npx",
+      "args": ["-y", "<npm-package-for-mcp-KnowS-AI_medical_service>"],
+      "env": {
+        "MEDKNOWS_API_KEY": "<your-medknows-api-key>",
+        "MEDKNOWS_BASE_URL": "https://www.medknows.com"
+      }
+    },
+    "metaso-search": {
+      "command": "npx",
+      "args": ["-y", "<npm-package-for-metasota-API-MCP>"],
+      "env": {
+        "METASO_API_KEY": "<your-metaso-api-key>"
+      }
     }
   }
 }

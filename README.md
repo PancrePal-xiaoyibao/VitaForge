@@ -139,35 +139,16 @@ cp -r .gemini/skills/* ~/.gemini/skills/
 
 ## 🔌 推荐 MCP 配置
 
-VitaForge 的部分 skill 依赖外部 MCP（Model Context Protocol）服务发挥全部能力。以下是医学-生命科学场景的核心推荐：
+VitaForge 的部分 skill 依赖外部 MCP（Model Context Protocol）服务发挥完整能力。医学-生命科学场景优先维护以下开源/社区 MCP：
 
-| MCP 服务 | 用途 | 被哪些 skill 使用 |
-|---------|------|------------------|
-| **[openalex-mcp-server](https://github.com/elicharity/openalex-mcp-server)** | 学术文献检索（论文/作者/引用） | `deep-research` `paper-reader` `ai4s-dry-lab` `extract` |
-| **[pubmed-data-server](https://github.com/your/pubmed-mcp)** | PubMed 医学文献核心库 | `medical-advisory` `dr-midas` `pubmed-linker` `paper-reader` |
-| **scrapling / playwright** | 网页抓取（期刊/数据库） | `deep-research` `shidianguji-fetcher` |
-| **web-reader / jina-reader** | 网页/PDF 阅读 | `paper-reader` `pdf-reader` |
+| MCP 服务 | 用途 | ModelScope | API 申请 |
+|---------|------|------------|----------|
+| `mcp-pubmed-llm-server` | PubMed/NCBI 医学文献检索、PMID 证据查询 | [liueic/mcp-pubmed-llm-server](https://www.modelscope.cn/mcp/servers/liueic/mcp-pubmed-llm-server) | [NCBI API Key](https://www.ncbi.nlm.nih.gov/account/settings/) |
+| `pubmed-openAlex-mcp` | PubMed + OpenAlex 学术文献、作者、机构、引用检索 | [Damncheater/pubmed-openAlex-mcp](https://www.modelscope.cn/mcp/servers/Damncheater/pubmed-openAlex-mcp) | [OpenAlex](https://openalex.org/login) |
+| `mcp-KnowS-AI_medical_service` | KnowS/MedKnowS 医学知识与问答服务 | [caiql2002/mcp-KnowS-AI_medical_service](https://www.modelscope.cn/mcp/servers/caiql2002/mcp-KnowS-AI_medical_service) | [MedKnowS QuickQA](https://www.medknows.com/quickqa) |
+| `metasota-API-MCP` | 秘塔搜索 API，用于网页、指南、新闻和中文资料交叉检索 | [Damncheater/metasota-API-MCP](https://www.modelscope.cn/mcp/servers/Damncheater/metasota-API-MCP) | [秘塔 API Keys](https://metaso.cn/search-api/api-keys) |
 
-### Claude Code MCP 配置示例
-
-在 `~/.claude.json` 或项目 `.mcp.json` 中添加：
-
-```json
-{
-  "mcpServers": {
-    "openalex": {
-      "command": "npx",
-      "args": ["-y", "openalex-mcp-server"]
-    },
-    "pubmed": {
-      "command": "uvx",
-      "args": ["pubmed-mcp-server"]
-    }
-  }
-}
-```
-
-> 📋 完整 MCP 配置模板见 [`deploy/mcp-config.template.json`](./deploy/mcp-config.template.json)。无 MCP 也能用 —— 大部分 skill 内置降级逻辑。
+> 📋 MCP 源码地址、ModelScope 页面、npx/npm/本地部署方法和 API Key 申请入口见 [`docs/medical-mcp-servers.md`](./docs/medical-mcp-servers.md)。配置模板见 [`deploy/mcp-config.template.json`](./deploy/mcp-config.template.json)。无 MCP 也能用 —— 大部分 skill 内置降级逻辑。
 
 ---
 
