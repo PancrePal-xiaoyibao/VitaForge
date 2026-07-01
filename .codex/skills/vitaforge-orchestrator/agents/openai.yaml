@@ -1,0 +1,4 @@
+interface:
+  display_name: "VitaForge Orchestrator"
+  short_description: "医学-生命科学 AI4S 全场景分诊调度器 — VitaForge 主入口"
+  default_prompt: "我有医学、生命科学或科研相关的需求，请帮我路由到最合适的 skill"

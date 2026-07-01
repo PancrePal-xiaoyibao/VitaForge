@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "openalex": {
+      "command": "npx",
+      "args": ["-y", "openalex-mcp-server"]
+    },
+    "pubmed": {
+      "command": "uvx",
+      "args": ["pubmed-mcp-server"]
+    }
+  }
+}

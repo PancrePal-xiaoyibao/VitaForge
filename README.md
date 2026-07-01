@@ -1,0 +1,340 @@
+<div align="center">
+
+# 🧬 VitaForge
+
+### 面向医学与生命科学的 AI4S 干实验引擎
+
+**_Forge your AI scientist. From single cell to bedside._**
+
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm--NC%201.0.0-blue.svg)](./LICENSE)
+[![Ethics](https://img.shields.io/badge/Ethics-Medical%20%26%20AI%20Responsible-red.svg)](./ETHICS.md)
+[![Platforms](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Gemini-green.svg)](#-一键部署)
+[![Skills](https://img.shields.io/badge/Skills-28%20%2B%20orchestrator-orange.svg)](#-技能矩阵)
+[![One-Click Deploy](https://img.shields.io/badge/Deploy-One--Click-success.svg)](#-一键部署)
+[![中文友好](https://img.shields.io/badge/中文-友好-brightgreen.svg)](#)
+
+```
+ ██╗   ██╗████████╗██╗  ██╗ █████╗ ██████╗ ███████╗
+ ██║   ██║╚══██╔══╝██║  ██║██╔══██╗██╔══██╗██╔════╝
+ ██║   ██║   ██║   ███████║███████║██████╔╝███████╗
+ ╚██╗ ██╔╝   ██║   ██╔══██║██╔══██║██╔══██╗╚════██║
+  ╚████╔╝    ██║   ██║  ██║██║  ██║██║  ██║███████║
+   ╚═══╝     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+```
+
+_Vita_ (拉丁: 生命) × _Forge_ (锻造工坊) — 在双螺旋与临床之间，锻造你的 AI 科学家。
+
+</div>
+
+---
+
+## 📖 这是什么
+
+**VitaForge** 是一个**一键部署的后平滑技能包**：把 28 个精心编排的 AI skill 融合去重，覆盖医学-生命科学 AI4S 的**全研究生命周期** —— 从测序数据到论文发表，从循证医学到基金申请。
+
+> 空白的 Claude Code / Codex / Gemini 环境，`git clone` 后一条命令秒变医学-生命科学专家。
+
+这不是一个普通的 prompt 集合。VitaForge 内置：
+
+- 🧬 **AI4S 干实验引擎** — SPEC 驱动 + OODA 循环 + Gate 门控 + 强制 Worklog 的端到端研究自动化
+- 🔬 **scRNA-seq 全流程** — 从 CellRanger 输出到细胞通讯的 8-Phase 标准化 pipeline，硬件感知 + AI 自动注释
+- 🩺 **循证医学 + 中医** — 实时调用顶级医学数据库的私人医疗顾问
+- 📚 **科研闭环** — 文献调研 → 实验分析 → 图表叙事 → 论文写作 → 期刊投稿 → 参考文献定稿
+- 🤖 **自进化社区** — Agent 能自己优化 skill 并给仓库提 PR
+
+---
+
+## 💡 为什么需要 VitaForge
+
+医学与生命科学的干实验研究者，每天在重复劳动上消耗大量精力：
+
+| 痛点 | VitaForge 的解法 |
+|------|-----------------|
+| 🧪 scRNA-seq pipeline 各实验室各写一套，难复现 | `scrna-bindlab-full-workflow` — 8 Phase 标准化 + 硬件感知调度 |
+| 📚 文献读不完、综述写不出 | `deep-research` 多 agent 并行 + `paper-reader` 批判性精读 |
+| 🎨 图表做出来不会讲故事 | `dr-midas` 科研炼金术士（但可被你「调教」得更克制，见[社区闭环](#-让-agent-优化-skill-并提-pr)） |
+| 📝 论文写作 AI 味太重 | `thesis-writing-mentor` RAG 风格模仿 + 去 AI 化 + 盲审模拟 |
+| 📬 选刊、投稿、审稿回复一团乱 | `sci-journal-submission-expert` 全流程专家 |
+| 💰 国自然基金本子写不好 | `nsfc-proposal-advisor` 资深评审视角辅导 |
+| 🩺 病情复杂、循证证据难找 | `medical-advisory` 循证 + 中医整体观 |
+| 🐛 R/Python 生信脚本 debug 难 | `code-debugger` + `code-review` + `codebase-context` 工程底座 |
+
+---
+
+## ✨ 核心特性
+
+- **🎯 一键部署** — 仓库本身就是部署单元，`git clone` + 一条命令，三平台（Claude/Codex/Gemini）全就位
+- **🌐 三镜像同步** — 每个 skill 在 `.claude/` `.codex/` `.gemini/` 三平台保持一致
+- **🔀 后平滑网络** — skill 间通过有向网络协议互调，主调度 `vitaforge-orchestrator` 全局路由
+- **🛡️ 伦理优先** — PolyForm-NC 防商业滥用 + ETHICS.md 医学伦理红线
+- **🤝 社区自进化** — Agent 可自我优化 skill 并贡献 PR（[Dr Midas 案例](#-让-agent-优化-skill-并提-pr)）
+
+---
+
+## 🚀 一键部署
+
+### 方式一：Claude Code（推荐）
+
+```bash
+git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
+cd VitaForge
+claude   # 启动 Claude Code，然后输入：
+         # /skill-deploy      一键融合部署到 ~/.claude 等
+         # 或 /vitaforge-orchestrator  直接开始描述需求
+```
+
+### 方式二：跨平台脚本
+
+```bash
+# Windows (PowerShell)
+./deploy/deploy.ps1
+
+# macOS / Linux (Bash)
+./deploy/deploy.sh
+```
+
+### 方式三：手动部署到单平台
+
+```bash
+# Claude Code
+cp -r .claude/* ~/.claude/
+
+# Codex CLI
+cp -r .codex/skills/* ~/.codex/skills/
+
+# Gemini CLI
+cp -r .gemini/skills/* ~/.gemini/skills/
+```
+
+> 📌 部署后，所有 28 个 skill + 主调度 `vitaforge-orchestrator` 立即可用。不确定用哪个？先 `/vitaforge-orchestrator` 让它帮你路由。
+
+---
+
+## 🔌 推荐 MCP 配置
+
+VitaForge 的部分 skill 依赖外部 MCP（Model Context Protocol）服务发挥全部能力。以下是医学-生命科学场景的核心推荐：
+
+| MCP 服务 | 用途 | 被哪些 skill 使用 |
+|---------|------|------------------|
+| **[openalex-mcp-server](https://github.com/elicharity/openalex-mcp-server)** | 学术文献检索（论文/作者/引用） | `deep-research` `paper-reader` `ai4s-dry-lab` `extract` |
+| **[pubmed-data-server](https://github.com/your/pubmed-mcp)** | PubMed 医学文献核心库 | `medical-advisory` `dr-midas` `pubmed-linker` `paper-reader` |
+| **scrapling / playwright** | 网页抓取（期刊/数据库） | `deep-research` `shidianguji-fetcher` |
+| **web-reader / jina-reader** | 网页/PDF 阅读 | `paper-reader` `pdf-reader` |
+
+### Claude Code MCP 配置示例
+
+在 `~/.claude.json` 或项目 `.mcp.json` 中添加：
+
+```json
+{
+  "mcpServers": {
+    "openalex": {
+      "command": "npx",
+      "args": ["-y", "openalex-mcp-server"]
+    },
+    "pubmed": {
+      "command": "uvx",
+      "args": ["pubmed-mcp-server"]
+    }
+  }
+}
+```
+
+> 📋 完整 MCP 配置模板见 [`deploy/mcp-config.template.json`](./deploy/mcp-config.template.json)。无 MCP 也能用 —— 大部分 skill 内置降级逻辑。
+
+---
+
+## 📊 技能矩阵
+
+VitaForge 包含 **28 个 skill** + **1 个主调度**，按场景分组：
+
+### 🧬 干实验引擎（核心）
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `ai4s-dry-lab` | `/ai4s-lab` | AI4S v2.3 端到端干实验引擎（SPEC+OODA+Gate+Worklog W1-W4） |
+| `scrna-bindlab-full-workflow` | `/scrna-bindlab-full-workflow` | scRNA-seq 8-Phase 全流程（CellRanger→细胞通讯，硬件感知） |
+| `scrna-celltype-annotation` | `/scrna-celltype-annotation` | 单细胞亚群注释 + 文献报告 |
+
+### 📚 文献与科研
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `deep-research` | `/deep-research` | 2-8 agent 并行深度调研 |
+| `paper-reader` | `/paper-reader` | 跨学科论文精读 + 批判性分析 |
+| `pubmed-linker` | `/update-pubmed-links` | PubMed 链接/PMID/DOI 批量更新 + 全文下载 |
+| `dr-midas` | `/midas` | 科研图表分析 + PubMed 叙事（可调教） |
+| `extract` | `/extract` | 从内容抽提研究方法论框架 |
+| `pdf-reader` | `/pdf-reader` | PDF → Markdown 前处理 |
+
+### 🩺 临床医学
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `medical-advisory` | `/medical-advisory` | 循证医学 + 中医整体观的私人医疗架构师 |
+
+### ✍️ 写作与投稿
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `thesis-writing-mentor` | `/thesis-writing-mentor` | 学位论文顾问 + RAG 风格模仿 + 盲审模拟 |
+| `sci-journal-submission-expert` | `/sci-journal-submission-expert` | SCI 投稿全流程（预审/选刊/审稿回复/APC） |
+| `paper-submission-manager` | `/paper-submission-manager` | 投稿清单 + QA + 材料打包 |
+| `nsfc-proposal-advisor` | `/nsfc-proposal-advisor` | 国自然基金辅导（破题/立项/预算） |
+
+### 📄 文档办公
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `office-docs` | `/office-docs` | PPTX/DOCX/XLSX 读取/编辑/创建/校验 |
+| `editing` | `/editing` | PPT 模板编辑 |
+| `pptxgenjs` | `/pptxgenjs` | 代码生成全新 PPTX |
+| `shidianguji-fetcher` | `/shidianguji-fetcher` | 识典古籍批量采集 |
+
+### 🔧 工程底座（干实验支撑）
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `code-debugger` | `/debug` | 上下文优先的精准调试（R/Python 生信脚本） |
+| `code-review` | `/code-review` | 分析 pipeline 代码审查 |
+| `codebase-context` | `/codebase-context` | 复杂生信代码库导航 |
+| `dev-env-scan` | `/dev-env-scan` | 开发环境扫描（生信工具链检测） |
+| `ai-spec` | `/ai-spec` | 需求 → 技术规范 |
+
+### 🏗️ 系统编排与部署治理
+
+| Skill | Command | 能力 |
+|-------|---------|------|
+| `vitaforge-orchestrator` | `/vitaforge-orchestrator` | **主调度** — 全场景分诊路由 |
+| `loop-engineer` | `/loop-engineer` | 多 skill package 设计与编排 |
+| `skill-deploy` | `/skill-deploy` | 一键融合部署 + 后平滑（路由双向一致性） |
+| `skill-governor` | `/skill-governor` | 单 skill 开发与质量门控 |
+
+---
+
+## 🎯 典型场景
+
+### 场景一：从零发表一篇 scRNA-seq 文章
+
+```
+/vitaforge-orchestrator  「我要做一批 scRNA-seq，从数据到投稿全流程」
+
+  → /deep-research + /paper-reader      文献调研
+  → /ai4s-lab                           实验方案 + OODA 循环
+  → /scrna-bindlab-full-workflow         全流程分析（8 Phase）
+  → /scrna-celltype-annotation           细胞注释
+  → /dr-midas + /thesis-writing-mentor   图表叙事 + 论文撰写
+  → /sci-journal-submission-expert       投稿
+  → /update-pubmed-links                 参考文献定稿
+```
+
+### 场景二：复杂病情循证分析
+
+```
+/vitaforge-orchestrator  「帮我分析一个复杂病例，要循证 + 中医视角」
+
+  → /medical-advisory                    循证 + 中医整体观
+  → /deep-research                       最新文献支撑
+  → /paper-reader                        关键证据精读
+```
+
+### 场景三：国自然基金本子
+
+```
+/vitaforge-orchestrator  「我要申请国自然，需要破题和立项依据」
+
+  → /nsfc-proposal-advisor               破题 + 科学问题 + 立项依据
+  → /deep-research                       前沿文献支撑
+  → /thesis-writing-mentor               去AI化润色
+```
+
+### 场景四：日常 Play（PPT/文档/古籍）
+
+```
+/office-docs       做答辩 PPT
+/editing           编辑已有 PPT 模板
+/pptxgenjs         代码生成炫酷 PPT
+/shidianguji-fetcher  批量采集古籍研究
+```
+
+---
+
+## 🍴 Fork 写自己的 Agent
+
+VitaForge 的每个 skill 都是独立的、可 fork 的。你可以在自己 fork 里：
+
+1. 修改现有 skill 的 prompt 适配你的实验室流程
+2. 新增针对你研究方向的 skill（如空间转录组、蛋白质组学）
+3. 调整主调度路由表
+
+详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+
+---
+
+## 🤖 让 Agent 优化 Skill 并提 PR
+
+VitaForge 最酷的玩法 —— **让你正在用的 agent 自己优化它用的 skill**。
+
+### 实战：Dr. Midas 讲故事太夸张？
+
+直接对你的 agent 说：
+
+```
+我刚用 /midas，发现 Dr. Midas 把初步发现吹成"革命性突破"，不符合科研严谨性。
+请：
+1. 调用 /skill-governor 优化 dr-midas 的 SKILL.md（三镜像同步），
+   禁止 revolutionize/groundbreaking 等绝对化词，强制不确定性限定词 + 文献支撑。
+2. fork 上游 PancrePal-xiaoyibao/VitaForge，建分支 fix/dr-midas-tone-down，
+   commit + 提 PR，描述写清问题、优化思路、三镜像改动。
+```
+
+一个 prompt，agent 自动完成：`skill-governor 优化 → 三镜像同步 → fork → 分支 → commit → PR`。
+
+> 📖 完整流程与 PR 模板见 [CONTRIBUTING.md](./CONTRIBUTING.md#-方式二优化现有-skill含agent-自我优化闭环)。
+
+---
+
+## 📜 License & Ethics
+
+VitaForge 采用 **双 License + 伦理附加**：
+
+| 文件 | 作用 |
+|------|------|
+| [LICENSE](./LICENSE) | **PolyForm Noncommercial 1.0.0** — 源码可见、可改、可分发；**非商用免费**，商用需授权 |
+| [ETHICS.md](./ETHICS.md) | **医学/AI 负责任使用附加条款** — 禁基因歧视、禁未授权临床决策、禁未知情同意研究、禁生物武器、禁学术不端 |
+
+**简言之**：
+- ✅ 个人研究、教育、非营利机构、公益 —— **免费使用、修改、分发**
+- ❌ 商业用途（含医院/药企商业化产品）—— **需书面授权**
+- ❌ 任何违反 ETHICS.md 的用途 —— **立即终止许可**
+
+---
+
+## 🙏 致谢
+
+VitaForge 站在巨人的肩膀上：
+
+- 所有贡献者与社区成员
+- [Superpowers](https://github.com/obra/superpowers) 框架的启发
+- [PolyForm Project](https://polyformproject.org/) 的开源 license
+- Claude Code / OpenAI Codex / Gemini CLI 三个优秀平台
+
+> 特别感谢每一位让 AI 在医学与生命科学领域负责任地发挥价值的实践者。
+
+---
+
+## 💬 社区
+
+- 🐛 **Bug / 建议**: [GitHub Issues](https://github.com/PancrePal-xiaoyibao/VitaForge/issues)
+- 🤝 **贡献**: [CONTRIBUTING.md](./CONTRIBUTING.md)
+- 🔒 **伦理举报**: [ETHICS.md 第 7 节](./ETHICS.md#7-举报与反馈)
+
+---
+
+<div align="center">
+
+**🧬 让 AI 在双螺旋上点火开炉喵～** (´｡• ᵕ •｡`) ♡
+
+_If VitaForge helps your research, please consider starring ⭐ the repo and citing it in your work._
+
+</div>

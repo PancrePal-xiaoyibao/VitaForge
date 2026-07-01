@@ -1,0 +1,9 @@
+display_name: "scRNA Bindlab Full Workflow"
+short_description: "scRNA-seq 端到端全流程自动化分析引擎 — 从 CellRanger 到高级下游分析"
+default_prompt: |
+  启动 scRNA-seq 全流程分析。请先检查 HARDWARE_CONFIG.md 是否存在，
+  然后按 Phase 0-7 顺序执行标准化 pipeline：
+  Data Ingestion → QC → Seurat Processing → Marker Discovery →
+  AI Cell Annotation → Visualization → DGE/Enrichment → Advanced Analyses。
+  Phase 4 细胞注释必须调用 /scrna-celltype-annotation，由 AI agent 查文献完成。
+  所有计算密集步骤使用 future 并行，遵循 HARDWARE_CONFIG.md 资源限制。
