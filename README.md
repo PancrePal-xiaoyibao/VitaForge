@@ -96,6 +96,198 @@
 
 ---
 
+## 🌱 研究者 15 分钟第一次 AI4S 贡献
+
+> **从"写代码不熟"到"给公益社区 PR 一份研究方案/SOP/pipeline"，一杯咖啡的时间搞定喵～** (´｡• ᵕ •｡`) ♡
+>
+> **谁适合走这条路径**：医学生 · 研究生小白 · 临床医生 · 专科护士 · 生信新手 · 想把 AI4S 方法学扩散给师弟师妹的 PI。
+
+### 🗺️ 完整链路（一图看懂）
+
+```
+ ①小胰宝社区总入口     ②挑一个研究方向        ③开 Codespace / 本地   ④一句话部署 VitaForge
+ ─────────────────  ──────────────────  ──────────────────  ──────────────────
+  PancrePal Projects   单细胞/循证/病例     浏览器里的 VS Code       (贴部署 prompt)
+        │                    │                     │                        │
+        ▼                    ▼                     ▼                        ▼
+ ⑧提 PR / 传播        ⑦Agent 沉淀成果-        ⑥一句话跑通            ⑤挂上医学 MCP
+ ─────────────────  写方案-出图-成稿          AI4S 全流程          PubMed / OpenAlex
+   gh pr create        (OODA + Gate 门控)      (SPEC → 分析 → 图 → 稿)   / KnowS
+```
+
+---
+
+### Step 1 · 到社区总入口挑一个"研究方向"
+
+📌 **官方 Project 面板**：<https://github.com/orgs/PancrePal-xiaoyibao/projects>
+
+新手推荐从下面这些方向开始（每个方向都有对应的社区仓库或 issue 可以贡献）：
+
+<details>
+<summary><b>🔬 单细胞 & 空间组学方向（scRNA-seq / ST）</b></summary>
+
+- 用 `/scrna-bindlab-full-workflow` 跑通一个公共数据集（GEO / CellxGene），把 QC → 聚类 → 注释 → 通讯的**完整分析日志**沉淀为 markdown 报告
+- 用 `/scrna-celltype-annotation` 做一个专属癌种（胰腺癌 / 乳腺癌 / 淋巴瘤）的**细胞类型注释库**，PR 到相关子项目
+- 对接 [openpancan](https://github.com/PancrePal-xiaoyibao/openpancan) 的 TCGA-PAAD / GTEx Phase，把某个基因的表达谱补齐
+
+</details>
+
+<details>
+<summary><b>🩺 临床医生 & 专科护士方向（循证 / 病例 / 患者管理）</b></summary>
+
+- 用 `/medical-advisory` + `/deep-research` 分析一个**匿名化复杂病例**，产出循证 + 中医整体观的双视角报告，PR 到 [opencare-skillhub](https://github.com/opencare-skillhub)
+- 用 `/paper-reader` 精读 3-5 篇本专科最新 guideline，输出**结构化知识卡片**贡献到病情管理知识库
+- 把您专科的**并发症管理 SOP** 沉淀为 skill / 知识库，让 AI 助手能回答专业问题
+
+</details>
+
+<details>
+<summary><b>📚 医学生 & 研究生方向（文献 / 综述 / 开题）</b></summary>
+
+- 用 `/deep-research` 做一次**跨学科文献扫描**，用 `/paper-reader` 精读关键文献，输出综述草稿 → PR 到相关项目 Wiki
+- 用 `/thesis-writing-mentor` 走一遍**去 AI 化 + 盲审模拟**流程，把您学位论文的经验总结成一份"避坑指南"
+- 用 `/extract` 从您已读的高分文献里反向提取**研究方法论**，让方法学在社区扩散
+
+</details>
+
+<details>
+<summary><b>💰 PI & 高年资医生方向（基金 / 立项 / 教学）</b></summary>
+
+- 用 `/nsfc-proposal-advisor` 走一遍破题 → 立项依据 → 预算的**完整辅导流程**，把您的经验（哪些坑要避、哪些创新点评审爱看）沉淀成教学 case
+- 带您的研究生用 VitaForge 走一遍完整流程，作为**实验室 AI4S 上手 SOP** 提交 PR
+- 优化 VitaForge 本身：您觉得哪个 skill 不好用？直接用 `/skill-governor` 迭代它
+
+</details>
+
+**认领方向**：在对应 issue 下评论 `我想沿 <方向> 做一份 AI4S 贡献，预计 X 天内提 PR`，或在项目讨论区发帖开新话题。
+
+---
+
+### Step 2 · 打开目标项目仓库，进入 Codespace
+
+以 [VitaForge](https://github.com/PancrePal-xiaoyibao/VitaForge) 或您想贡献的目标仓库为例：
+
+1. 打开仓库主页
+2. **右上角 `<> Code` 按钮 → `Codespaces` 标签页 → `Create codespace on main`**
+3. 等 30 秒–2 分钟，浏览器里就打开一个完整的 VS Code。
+
+> 💡 **每个 GitHub 账号有 60 小时/月免费 Codespace 额度**，日常研究小任务足够。用完记得关闭，不然会继续计时。
+>
+> 🖥️ **有本地 R/Python + conda 环境的师兄师姐**：直接 `git clone` 到本地就行，Codespace 只是给"不想折腾环境"的师弟师妹准备的。
+
+---
+
+### Step 3 · 在 Codespace / 本地装一个 AI CLI
+
+终端里选一个安装（**任选其一**）：
+
+```bash
+# 选项 A：Claude Code（推荐）
+npm install -g @anthropic-ai/claude-code && claude
+
+# 选项 B：OpenAI Codex CLI
+npm install -g @openai/codex && codex
+
+# 选项 C：Google Gemini CLI
+npm install -g @google/gemini-cli && gemini
+```
+
+首次运行会提示登录 / 贴 API Key。
+
+> [!IMPORTANT]
+> **🇨🇳 国内医学院 / 医院开发者**：如果无法访问 Anthropic 官方 API，可以走国产大模型（**智谱 GLM-5.2**、**DeepSeek**、**Kimi**、**小米 MiMo**、**硅基流动**），配置方法与 CodeForge 完全一致，详见 [CodeForge 国内 API 指南](https://github.com/PancrePal-xiaoyibao/CodeForge/blob/main/docs/cn-api-providers.md)。GLM-5.2[1m] / DeepSeek-V4-Pro / Kimi-K2.7-Code 都能顺畅驱动 VitaForge 全流程 skill。
+
+---
+
+### Step 4 · 一句话部署 VitaForge
+
+**在 Agent 会话里，把下面这段完整贴进去**（也见上方 `🚀 一键部署 · 方式零`）：
+
+```text
+请把 https://github.com/PancrePal-xiaoyibao/VitaForge 部署到当前用户的本机 Agent 环境。
+详细步骤见 README「🚀 一键部署」章节。
+```
+
+部署完成后，`/vitaforge-orchestrator` `/ai4s-lab` `/scrna-bindlab-full-workflow` `/medical-advisory` `/nsfc-proposal-advisor` 等 28+ 命令立即可用。**推荐同时挂上医学 MCP**（PubMed / OpenAlex / KnowS / 秘塔），详见 [`docs/medical-mcp-servers.md`](./docs/medical-mcp-servers.md)。
+
+---
+
+### Step 5 · 一句话让 Agent 完成 AI4S 全流程 & 沉淀成果
+
+**把下面这段贴给 Agent**（把 `<方向>` `<数据集/病例/文献>` `<目标仓库>` 换成 Step 1 认领的内容）：
+
+```text
+请遵循 VitaForge 方法论，完成一次开源研究贡献闭环：
+
+方向: <单细胞分析 / 循证病例 / 文献综述 / 基金开题 / …>
+数据源: <GEO 编号 / 病例摘要 / 文献主题 / …>
+目标仓库: <PancrePal-xiaoyibao/xxx>
+
+工作流(必须按顺序执行,每个环节完成后简报进度):
+
+【一、SPEC 起草】
+1. 跑 /vitaforge-orchestrator,让主调度识别所处研究阶段并路由。
+2. 跑 /ai4s-lab 建立项目 SPEC(研究问题 / 假设 / 方法 / 输出物),
+   写到 docs/spec/<slug>.md,先展示给我确认。
+
+【二、文献 & 证据补齐】
+3. 跑 /deep-research 做主题相关的多 agent 并行调研,保留引用。
+4. 跑 /paper-reader 精读 top 3-5 篇关键文献,输出批判性精读报告。
+5. 若涉及临床决策,跑 /medical-advisory 补循证支持;
+   若涉及 PubMed 检索,用 pubmed-linker 更新 PMID/DOI。
+
+【三、分析 / 写作 / 图表】
+6. 按 SPEC 执行具体分析:
+   - scRNA-seq 项目走 /scrna-bindlab-full-workflow (8 Phase)
+   - 细胞注释走 /scrna-celltype-annotation
+   - 图表叙事走 /midas (Dr. Midas,注意克制口吻)
+   - 论文草稿走 /thesis-writing-mentor(去 AI 化 + 盲审模拟)
+   - SCI 投稿准备走 /sci-journal-submission-expert
+   - 基金本子走 /nsfc-proposal-advisor
+7. 每完成一个大 Phase,强制写入 worklog(W1)+ 输出目录 README(W2)
+   + 数据/文献验证(W3)+ 脚本日志(W4),这是 AI4S 方法论的强制门控。
+
+【四、沉淀 & 贡献】
+8. 把研究方案 / SOP / 分析日志 / 图表脚本 / 论文草稿整理到目标仓库
+   合适位置(通常是 docs/ 或 experiments/<日期>-<slug>/)。
+9. 用 conventional commit 提交:
+   docs(<scope>): <一句话> / feat(<scope>): <一句话>
+   commit message 末尾附:
+     Contributed via VitaForge (ai4s-lab + deep-research + ...)
+     Related: <issue link>
+10. git push 到我的 fork 分支。
+11. 用 gh pr create 开 PR,标题按 conventional commit,body 使用
+    VitaForge 研究贡献模板,必填「AI 辅助披露」段,列出用到的 skill。
+12. 在原 issue 下 gh issue comment,贴 PR 链接,@ 相关维护者请求 review。
+
+【硬性约束】
+- 每个大环节(SPEC、文献、每个 Phase、提交)必须停下等我 review。
+- commit / push / 开 PR 前必须获得我的明确「continue」授权。
+- 涉及临床数据:必须先脱敏,禁传真实患者可识别信息。
+- 遵守本仓库(以及被贡献项目)的 LICENSE 与 ETHICS 要求。
+```
+
+**Agent 会一边工作一边简报**。您只需要：
+- 看 SPEC 阶段,觉得靠谱说 `continue`
+- 看每个 Phase 的 worklog,觉得靠谱说 `continue`
+- commit / push / 开 PR 前,看一遍最终改动,说 `continue` 完成闭环
+
+---
+
+### Step 6 · 传播 · 让微光成炬
+
+**做完一次贡献,顺手把经验扩散出去,是 VitaForge 最珍贵的部分喵～** ヽ(✿ﾟ▽ﾟ)ノ
+
+- 📝 **写一篇教学 issue**:把您这次贡献的完整对话截图 + 踩坑记录发到目标仓库的 Discussions,标题类似「新手 X 天用 VitaForge 完成 <方向> 贡献 · 完整回放」
+- 🎥 **录一段 15 分钟教学视频**:发 B 站 / YouTube / 医学院公众号,让您专科的同事 / 师弟师妹 15 分钟看会
+- 👥 **拉师弟师妹入群 & 认领 issue**:您走通的方向,让下一个人接力,团队的 AI4S 能力就复制起来了
+- 🔄 **迭代 VitaForge 本身**:发现某个 skill 不好用?直接用 `/skill-governor` 优化 + 三镜像同步 + 提 PR 到 VitaForge 仓库(见下方 [🤖 让 Agent 优化 Skill 并提 PR](#-让-agent-优化-skill-并提-pr))
+- ✍️ **署名 & 学术引用**:您的贡献进入了社区,别忘了在自己的论文 / 论文致谢 / 学位论文中引用 VitaForge / 小胰宝社区,让开源公益 AI4S 得到应有的学术认可
+
+> **一个人跑通全流程是"完成任务";带 3 个人一起跑通,才是"AI4S 方法学的复制"。** VitaForge 的目标从来不是替代研究者,而是**让专业能力可复制、可扩散、可沉淀**。
+
+---
+
 ## 🚀 一键部署
 
 ### 方式零：通用 Agent 一句话部署（OpenClaw / Hermes / 任意代码 Agent）
