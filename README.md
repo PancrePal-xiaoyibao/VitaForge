@@ -290,67 +290,317 @@ npm install -g @google/gemini-cli && gemini
 
 ## 🚀 一键部署
 
-### 方式零：通用 Agent 一句话部署（OpenClaw / Hermes / 任意代码 Agent）
+VitaForge 的部署哲学是 **「能力分层 + 动态发现」** —— 不是只为某一个 agent 设计，而是按 agent **是否具备原生 skill 文件规范**分为三层。先对号入座，再选部署方式：
 
-把下面这段直接发给任意具备终端和文件读写权限的 agent（也可以把 URL 换成你的 fork）：
+### 📊 第一步：你的 Agent 属于哪一层？
 
-```text
-请把 https://github.com/PancrePal-xiaoyibao/VitaForge 部署到当前用户的本机 Agent 环境。
+| Tier | 能力特征 | 代表 Agent | 部署方式 |
+|:----:|----------|------------|----------|
+| **A · 原生 Skill-Agent** | 有官方 skill 文件格式，可用 `/command` 或 `$command` 触发，支持 skill 路由网络 | **Claude Code** · **OpenAI Codex CLI** · **Google Gemini CLI** · **Google Antigravity** · Cursor · Cline · Continue | 三镜像格式化部署 + `skill-deploy` 融合去重 + 后平滑 |
+| **B · 通用 Coding-Agent** | 无原生 skill 规范，仅依赖 `AGENTS.md` + 终端/文件权限 | **WorkBuddy** · **OpenClaw** · **Hermes / Hermas** · **Aider** · 各类 LLM CLI agent | 一句话部署 prompt + AGENTS.md 自动加载 + 主调度 markdown 路由 |
+| **C · Hybrid / 边缘** | 支持 `.rules` 类文件但无完整 skill 网络 | Windsurf · Trae / 通义灵码 · GitHub Copilot · JetBrains AI | Tier B 为主 + 按需转 rules 文件 |
 
-要求：
-1. 确认本机有 git 和可用 shell；如果缺依赖，先明确说明缺什么。
-2. 克隆仓库到一个合适的本地目录；如果目录已存在且是 Git 仓库，先执行 git pull --ff-only 更新。
-3. 进入 VitaForge 仓库根目录后按系统执行：
-   - Windows PowerShell: powershell -ExecutionPolicy Bypass -File .\deploy\deploy.ps1 -Yes
-   - macOS / Linux Bash: chmod +x ./deploy/deploy.sh && ./deploy/deploy.sh --yes
-4. 如果脚本执行失败，改用手动兜底部署：
-   - 复制 .claude/* 到 ~/.claude/
-   - 复制 .codex/skills/* 到 ~/.agents/skills/ 和 ~/.codex/skills/
-   - 复制 .gemini/skills/* 到 ~/.gemini/skills/
-   覆盖同名文件前必须先备份。
-5. 部署完成后检查至少存在这些入口之一：
-   ~/.agents/skills/vitaforge-orchestrator/
-   ~/.codex/skills/vitaforge-orchestrator/
-   ~/.claude/commands/vitaforge-orchestrator.md
-   ~/.gemini/skills/vitaforge-orchestrator/
-6. 最后告诉我部署路径、是否发生备份、下一步应该用哪个入口启动 VitaForge。
+> 📖 **详细分类标准、判定算法、每个 agent 的部署路径/MCP/降级策略** → 见 [`docs/agent-deployment-rules.md`](./docs/agent-deployment-rules.md)
+>
+> 简化口诀：**「能不能用 `/命令` 触发」是 Tier A 的最直观判据。**
+
+---
+
+> 🎯 **怎么用本节**：找到你正在用的 agent（在 🅰️ 区或 🅱️ 区），照抄对应小节的 4 步命令即可。每个 agent 都有独立的【安装 → 部署 VitaForge → 验证 → 触发示例】。
+
+---
+
+## 🅰️ Tier A 区 · 原生 Skill-Agent（专业 · 有官方 skill 规范 · 可 `/命令` 触发）
+
+> **特点**：原生支持 `skills/commands/agents` 文件格式，slash command 触发，MCP 原生支持，三镜像融合部署 + 路由后平滑。
+> **代表**：Claude Code · Codex CLI · Gemini CLI · Antigravity · Cursor · Cline · Continue
+
+### A1 · Claude Code ⭐（主推 · 体验最佳）
+
+**① 安装 Claude Code**：
+
+```bash
+npm install -g @anthropic-ai/claude-code
 ```
 
-### 方式一：Claude Code（推荐）
+**② 克隆并部署 VitaForge**：
 
 ```bash
 git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
 cd VitaForge
-claude   # 启动 Claude Code，然后输入：
-         # /skill-deploy      一键融合部署到 ~/.claude 等
-         # 或 /vitaforge-orchestrator  直接开始描述需求
+claude
 ```
 
-### 方式二：跨平台脚本
+进入 Claude Code 会话后，输入：
+
+```text
+/skill-deploy
+```
+
+> `/skill-deploy` 会一键融合去重部署到 `~/.claude/`、`~/.codex/`、`~/.gemini/`，并执行路由双向一致性后平滑。也可改用跨平台脚本：`.\deploy\deploy.ps1 -Yes`（Win）/ `./deploy/deploy.sh --yes`（Mac/Linux）。
+
+**③ 验证部署成功**：
+
+```text
+/vitaforge-orchestrator
+```
+
+能弹出主调度说明 ✅。
+
+**④ 触发示例**：
+
+```text
+/vitaforge-orchestrator  我要做一批 scRNA-seq 分析，从数据到投稿
+```
+
+---
+
+### A2 · OpenAI Codex CLI
+
+**① 安装**：
 
 ```bash
-# Windows (PowerShell)
-./deploy/deploy.ps1 -Yes
+npm install -g @openai/codex
+```
 
-# macOS / Linux (Bash)
+**② 克隆并部署 VitaForge**：
+
+```bash
+git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
+cd VitaForge
+
+# Windows PowerShell
+.\deploy\deploy.ps1 -Yes
+
+# macOS / Linux Bash
 ./deploy/deploy.sh --yes
 ```
 
-### 方式三：手动部署到单平台
+> 脚本会自动复制 `.codex/skills/*` → `~/.codex/skills/` + `~/.agents/skills/`（Codex 双路径发现）。
+
+**③ 验证**：
 
 ```bash
-# Claude Code
-cp -r .claude/* ~/.claude/
-
-# Codex CLI
-cp -r .codex/skills/* ~/.agents/skills/
-cp -r .codex/skills/* ~/.codex/skills/
-
-# Gemini CLI
-cp -r .gemini/skills/* ~/.gemini/skills/
+codex
+# 进入会话后输入：
+$vitaforge-orchestrator
 ```
 
-> 📌 部署后，所有 28 个 skill + 主调度 `vitaforge-orchestrator` 立即可用。不确定用哪个？先 `/vitaforge-orchestrator` 让它帮你路由。
+**④ 触发语法**：`$skill-name`（Codex 用美元符号触发）
+
+---
+
+### A3 · Google Gemini CLI
+
+**① 安装**：
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+**② 克隆并部署 VitaForge**（任选一种）：
+
+```bash
+git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
+cd VitaForge
+
+# 方式一：批量符号链接（推荐，零拷贝，源码更新自动生效）
+gemini skills link "$PWD/.gemini"
+
+# 方式二：复制部署
+# Windows:  .\deploy\deploy.ps1 -Yes
+# Mac/Linux: ./deploy/deploy.sh --yes
+
+# 方式三：从 Git 安装
+gemini skills install https://github.com/PancrePal-xiaoyibao/VitaForge
+```
+
+**③ 验证**：
+
+```bash
+gemini
+# 描述需求，Gemini 渐进式披露自动匹配对应 skill
+```
+
+**④ 触发语法**：自然语言匹配（无 slash command），靠 skill description 命中
+
+---
+
+### A4 · Google Antigravity
+
+**① 安装**：从 <https://antigravity.google/> 下载 Antigravity IDE
+
+**② 部署 VitaForge**：
+
+```bash
+git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
+```
+
+然后在 Antigravity IDE 内：
+
+- 打开 **Settings → Skills**
+- 点 **Add Skill** → 选择 VitaForge 仓库的 `.gemini/skills/` 目录（或通过 **Add Skill from Git** 直接导入仓库 URL）
+
+**③ 验证**：Antigravity skill 列表中应出现 `vitaforge-orchestrator`
+
+**④ 触发语法**：自然语言匹配（与 Gemini CLI 一致）
+
+> ⚠️ Antigravity skill 格式仍在快速演进，**部署前请核对** [官方 Skills Codelab](https://codelabs.developers.google.com/getting-started-with-antigravity-skills) 的最新约定。
+
+---
+
+### A5 · Cursor / Cline / Continue（半专业 · Tier A 边缘）
+
+这三个 IDE agent 各有 rules 文件格式，需要**把 VitaForge skill 转换为对应格式**：
+
+| Agent | 文件位置 | 转换方式 |
+|-------|----------|----------|
+| **Cursor** | `.cursor/rules/vitaforge-orchestrator.mdc` | 主调度 SKILL.md → `.mdc`（YAML frontmatter + Markdown，附 `globs` 匹配规则） |
+| **Cline** | `.clinerules`（项目根单文件） | 浓缩主调度 + 技能索引 + 伦理红线为单文件 |
+| **Continue** | `.continue/rules/vitaforge.md` | 转 `.md` + YAML frontmatter |
+
+> 📋 完整转换模板（含可直接复制的 `.mdc` / `.clinerules` 范例）见 [`docs/agent-deployment-rules.md` §2.6-2.7](./docs/agent-deployment-rules.md#26-cursor半专业--tier-a-边缘)
+
+---
+
+## 🅱️ Tier B 区 · 通用 Coding-Agent（无原生 skill 规范 · 靠 AGENTS.md + 终端）
+
+> **特点**：**没有 slash command 网络**，靠 `AGENTS.md` 自动加载 + 一句话部署 prompt 工作。VitaForge 的 skill 路由在此退化为 markdown 指令。
+> **代表**：OpenClaw · WorkBuddy · Hermes / Hermas · Aider · 任意 LLM CLI agent
+
+> 💡 **关键**：所有 Tier B agent **共用同一段部署 prompt**，区别只在「触发主调度的话术」。先看 B1 学会模板，B2-B4 直接套用。
+
+### B1 · OpenClaw（Tier B 模板示例）
+
+**① 安装 OpenClaw**：见 [OpenClaw 官方 Onboard](https://github.com/openclaw/openclaw)
+
+**② 部署 VitaForge**（在 OpenClaw 工作区粘贴下面这段）：
+
+```text
+请把 https://github.com/PancrePal-xiaoyibao/VitaForge 部署到当前用户的本机。
+
+要求（按顺序执行，每步完成后简报）：
+1. 确认本机有 git 和可用 shell；缺依赖请明确说明，不要擅自安装。
+2. git clone 仓库到 ~/VitaForge（已存在则 git pull --ff-only 更新）。
+3. 进入仓库根目录，按系统执行部署脚本：
+   - Windows PowerShell: .\deploy\deploy.ps1 -Yes
+   - macOS / Linux Bash: ./deploy/deploy.sh --yes
+4. 脚本失败则手动兜底：复制 .codex/skills/* 到 ~/.agents/skills/，
+   复制 .gemini/skills/* 到 ~/.gemini/skills/，覆盖前先备份。
+5. 验证 ~/.agents/skills/vitaforge-orchestrator/ 存在。
+6. 告诉我部署路径、是否备份、下一步如何用自然语言触发主调度。
+```
+
+**③ 验证**：
+
+```bash
+ls ~/.agents/skills/vitaforge-orchestrator/   # 应存在 SKILL.md
+```
+
+**④ 触发主调度**（这是 Tier B 的核心话术，记住它）：
+
+```text
+请先读取 ~/VitaForge/AGENTS.md，理解 VitaForge 的技能清单和路由逻辑。
+我现在需要：<具体需求>。
+请按 AGENTS.md 路由表分诊，加载对应 .codex/skills/<name>/SKILL.md 并执行。
+每完成一个大环节停下等我 review。
+```
+
+---
+
+### B2 · WorkBuddy
+
+**① 安装**：见 WorkBuddy 官方文档
+
+**② 部署 VitaForge**：直接粘贴 **B1 第 ② 步** 的部署 prompt（命令完全通用）
+
+**③ 验证**：同 B1 第 ③ 步
+
+**④ 触发主调度**：粘贴 **B1 第 ④ 步** 的触发话术
+
+> 💡 WorkBuddy 与 OpenClaw 同属通用 agent，**部署命令 100% 通用**，区别仅在底层 LLM 和工作区 UI。
+
+---
+
+### B3 · Hermes / Hermas
+
+**① 安装**：按 Hermes 模型发行版官方说明安装
+
+**② 部署 VitaForge**：粘贴 **B1 第 ② 步** 的部署 prompt
+
+**③ 验证 + ④ 触发**：同 B1
+
+---
+
+### B4 · Aider（特殊 · 需写配置文件）
+
+**① 安装**：
+
+```bash
+pip install aider-chat
+```
+
+**② 克隆并写配置**：
+
+```bash
+git clone https://github.com/PancrePal-xiaoyibao/VitaForge.git
+cd VitaForge
+
+# 创建 .aider.conf.yml，强制 Aider 启动时读取 AGENTS.md
+cat > .aider.conf.yml <<'EOF'
+read:
+  - AGENTS.md
+  - ETHICS.md
+  - .codex/skills/vitaforge-orchestrator/SKILL.md
+auto-commits: false
+EOF
+```
+
+**③ 验证**：
+
+```bash
+aider
+# 在 aider 会话中描述需求，它会自动按 AGENTS.md 路由
+```
+
+**④ 触发**：直接用自然语言描述需求（如「帮我对这个 scRNA-seq 数据做 QC 和聚类，参考 ai4s-dry-lab 的方法论」）
+
+---
+
+## 🔄 跨平台一键脚本（所有 Tier 通用兜底）
+
+无论你用哪个 agent，下面这两个脚本都是 VitaForge 部署的**最终兜底**：
+
+```bash
+# Windows PowerShell — 合并部署 .claude/.codex/.gemini 到 %USERPROFILE%，重名自动备份
+.\deploy\deploy.ps1 -Yes
+
+# macOS / Linux Bash
+./deploy/deploy.sh --yes
+```
+
+脚本行为：合并部署（不覆盖，先备份 `.vitaforge-bak.<timestamp>`）→ 自动同步 `.codex/skills` → `~/.agents/skills/` → 输出部署日志。
+
+---
+
+## 🧭 还是不确定你的 agent 属于哪一层？
+
+走 [`docs/agent-deployment-rules.md` §6 决策树](./docs/agent-deployment-rules.md#6--决策树你的-agent-属于哪一层) —— 15 个主流 agent 的快速对照表 + 判定算法。
+
+> 📌 部署后，所有 28 个 skill + 主调度 `vitaforge-orchestrator` 立即可用。
+> - **Tier A 用户**：直接 `/vitaforge-orchestrator`（或 `$`/自然语言）让主调度路由
+> - **Tier B 用户**：用 B1 第 ④ 步的「触发话术」让主调度路由
+
+### 🛡️ 跨 Tier 治理铁律（不可降级）
+
+无论你的 agent 属于 A/B/C 哪层，以下原则必须一致：
+
+- ✅ **ETHICS.md 医学红线** — 所有 Tier 强制（[详见](./ETHICS.md)）
+- ✅ **BSL 1.1 商业边界** — 所有 Tier 强制（个人/科研/教育免费，商业需授权）
+- ✅ **AGENTS.md 单点真相** — Tier B/C 强制，Tier A 推荐同步
+- ✅ **commit 必须用户授权** — 所有 Tier 强制，禁止 agent 自动 commit/push
+- ✅ **临床数据脱敏** — 所有 Tier 强制，禁传真实患者可识别信息
+- ✅ **三镜像同步**（Tier A 专属）— `.claude` + `.codex` + `.gemini` 同步修改
 
 ---
 

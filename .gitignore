@@ -27,3 +27,4 @@ venv/
 
 # Claude Code local settings (user-specific, not for repo)
 .claude/settings.local.json
+/cache
